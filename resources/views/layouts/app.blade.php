@@ -45,6 +45,7 @@
                         @guest
                         <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                         @else
+                        <li><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
                         @can('user-list')
                         <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                         @endcan

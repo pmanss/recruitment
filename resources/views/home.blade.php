@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Grafik Pemasukan</div>
+                <div class="card-header">Grafik Pemasukan & Pengeluaran</div>
 
                 <div class="card-body">
                  <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Grafik Pemasukan {{$awal ?? ''}} s/d {{$akhir}}</h3>
+                        <h3 class="box-title">Grafik Pemasukan & Pengeluaran {{$awal ?? ''}} s/d {{$akhir}}</h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
