@@ -38,6 +38,8 @@
 										<th>Judul aktifitas</th>
 										<th>Detail aktifitas</th>
 										<th>Status</th>
+										<th>Pengeluaran</th>
+										<th>Pemasukan</th>
 										<th>Diupdate</th>
 										<th>Action</th>
 									</tr>
@@ -101,6 +103,8 @@
 				{ data: 'activity', name:'activity' },
 				{ data: 'activity_detail', name: 'activity_detail' },
 				{ data: 'status', name: 'status' },
+				{ data: 'outcome', name: 'outcome' },
+				{ data: 'income', name: 'income' },
 				{ data: 'updated_at', name: 'updated_at' },
 				{ data: 'action', name: 'action' }
 				]
@@ -170,6 +174,8 @@
 					$('#activity').val(data.activity);
 					$('#activity_detail').val(data.activity_detail);
 					$('#user_id').val(data.user_id);
+					$('#income').val(data.income);
+					$('#outcome').val(data.outcome);
 					$('#status').val(data.status).trigger('change');
 				})
 			});

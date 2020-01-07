@@ -10,6 +10,8 @@ class Todo extends Model
 		'activity',
 		'activity_detail',
 		'status',
+		'income',
+		'outcome',
 		'user_id',
 	];
 

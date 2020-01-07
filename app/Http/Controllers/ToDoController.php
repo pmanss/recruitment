@@ -81,7 +81,7 @@ class ToDoController extends Controller
     {
 
         $id = $request->id;
-        $attributes = ['activity' => $request->activity, 'activity_detail' => $request->activity_detail,'status' => $request->status,'user_id' => $request->user_id];
+        $attributes = ['activity' => $request->activity, 'income' => $request->income, 'outcome' => $request->outcome, 'activity_detail' => $request->activity_detail,'status' => $request->status,'user_id' => $request->user_id];
         $post   =   Todo::updateOrCreate(['id' => $id], $attributes);
         return Response::json($post);
     }

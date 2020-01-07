@@ -33,6 +33,18 @@
 								</select>
 							</div>
 						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<div class="form-group">
+								<strong>Pengeluaran:</strong>
+								{!! Form::text('income', null, array('placeholder' => 'Rp.','class' => 'form-control','id' => 'income')) !!}
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<div class="form-group">
+								<strong>Pemasukan:</strong>
+								{!! Form::text('outcome', null, array('placeholder' => 'Rp.','class' => 'form-control','id' => 'outcome')) !!}
+							</div>
+						</div>
 						<input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }} ">
 					</div>
 				</div>
