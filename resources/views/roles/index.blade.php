@@ -11,7 +11,7 @@
                 <div class="card-header"><i class="fa fa-users"></i> Manage Roles
                     <div class="float-right">
                         @can('role-create')
-                        <button class="btn btn-black btn-sm" data-toggle="modal" data-target="#role__modal">
+                        <button class="btn btn-hitam btn-sm" data-toggle="modal" data-target="#role__modal">
                             <i class="fa fa-plus"></i> Create new role
                         </button>
                         @endcan
@@ -45,7 +45,10 @@
         $('#table_view').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('roles.index') !!}',
+            ajax: {
+                url : '{!! route('roles.index') !!}',
+                
+            },
             columns: [
             { data: 'DT_RowIndex','orderable':false,'searchable':false},
             { data: 'name', name:'name' },

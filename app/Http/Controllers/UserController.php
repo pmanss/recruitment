@@ -22,12 +22,15 @@ class UserController extends Controller
     	if(request()->ajax()) {
     		return Datatables::of(User::query())->addColumn('action', function($get){
     			$json = $get->toJson();
-    			return "
-    			<center>
-    			<button title=\"Edit user $get->name\" data-id=\"$get->id\" class=\"btn btn-sm btn-edit btn-primary btn-update\"><i class=\"fa fa-edit\"></i> </button>
-    			<button title=\"Hapus user $get->name\" type=\"submit\" id=\"destroy\" data-id=\"$get->id\" data-name=\"$get->name\" class=\"btn btn-sm btn-edit btn-danger btn-destroy\"><i class=\"fa fa-trash\"></i> </button>
-    			</center>
-    			";
+    			if (auth()->user()->hasAnyRole(['Admin'])) {
+    				return "
+    				<center>
+    				<button title=\"Edit user $get->name\" data-id=\"$get->id\" class=\"btn btn-sm btn-edit btn-primary btn-update\"><i class=\"fa fa-edit\"></i> </button>
+    				<button title=\"Hapus user $get->name\" type=\"submit\" id=\"destroy\" data-id=\"$get->id\" data-name=\"$get->name\" class=\"btn btn-sm btn-edit btn-danger btn-destroy\"><i class=\"fa fa-trash\"></i> </button>
+    				</center>
+    				";
+    			}
+    			return "<center>You don't have permission</center>";
     		})
     		->addIndexColumn()->make(true);
     	}

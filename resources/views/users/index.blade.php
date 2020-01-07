@@ -8,9 +8,11 @@
 			<div class="card">
 				<div class="card-header"><i class="fa fa-users"></i> Manage Users
 					<div class="float-right">
-						<button class="btn btn-black btn-sm" data-toggle="modal" data-target="#user__modal">
+						@can('user-create')
+						<button class="btn btn-hitam btn-sm" data-toggle="modal" data-target="#user__modal">
 							<i class="fa fa-plus"></i> Create new user
 						</button>
+						@endcan
 					</div>
 				</div>
 				<div class="card-body">

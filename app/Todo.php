@@ -10,6 +10,7 @@ class Todo extends Model
 		'activity',
 		'activity_detail',
 		'status',
+		'user_id',
 	];
 
 }
