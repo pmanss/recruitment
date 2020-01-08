@@ -103,7 +103,6 @@
             var id = $(this).data('id');
             var name = $(this).data('name');
             $.get("{{ route('roles.index') }}" +'/' + id +'/edit', function (data) {
-                $('#modal-title').html('Edit Pegawai');
                 $('#btn_store').val("update-role");
                 $('#role__modal').modal('show');
                 $('#id').val(data.id);

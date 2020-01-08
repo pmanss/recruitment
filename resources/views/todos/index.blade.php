@@ -44,6 +44,17 @@
 										<th>Action</th>
 									</tr>
 								</thead>
+								<tfoot>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>Total</th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tfoot>
 							</table>
 						</div>
 					</div>
@@ -56,6 +67,12 @@
 	@push('scripts')
 
 	<script type="text/javascript">
+		function rupiah(angka){
+			var reverse = angka.toString().split('').reverse().join(''),
+			ribuan = reverse.match(/\d{1,3}/g);
+			ribuan = ribuan.join('.').split('').reverse().join('');
+			return ribuan;
+		}
 
 		$('document').ready(function(){
 
@@ -90,6 +107,18 @@
 						}
 					},
 				},
+				{
+					targets: 5,
+					render: function ( data, type, row ) {
+						return  'Rp.'+ rupiah(data) 
+					},
+				},
+				{
+					targets: 6,
+					render: function ( data, type, row ) {
+						return  'Rp.'+ rupiah(data) 
+					},
+				},
 				],
 				ajax: {
 					url: '{!! route('todos.index') !!}',
@@ -107,7 +136,42 @@
 				{ data: 'income', name: 'income' },
 				{ data: 'updated_at', name: 'updated_at' },
 				{ data: 'action', name: 'action' }
-				]
+				],
+				"footerCallback": function ( row, data, start, end, display ) {
+				var api = this.api(), data;
+		        // Remove the formatting to get integer data for summation
+		        var intVal = function ( i ) {
+		        	return typeof i === 'string' ?
+		        	i.replace(/[\$,]/g, '')*1 :
+		        	typeof i === 'number' ?
+		        	i : 0;
+		        };
+
+		        pengeluaran = api
+		        .column( 5, { page: 'current'} )
+		        .data()
+		        .reduce( function (a, b) {
+		        	return intVal(a) + intVal(b);
+		        }, 0 );
+
+		        // Update footer
+		        $( api.column( 5 ).footer() ).html(
+		        	'Rp.'+ rupiah(pengeluaran)
+		        	);
+
+		        pemasukan = api
+		        .column( 6, { page: 'current'} )
+		        .data()
+		        .reduce( function (a, b) {
+		        	return intVal(a) + intVal(b);
+		        }, 0 );
+
+		        // Update footer
+		        $( api.column( 6 ).footer() ).html(
+		        	'Rp.'+ rupiah(pemasukan)
+		        	);
+		    }
+
 			});
 
 			if ($("#form__action").length > 0) {
@@ -121,6 +185,14 @@
 						activity_detail: {
 							required: true,
 						},
+						income: {
+							required: true,
+							digits:true,
+						},
+						outcome: {
+							required: true,
+							digits:true,
+						},
 					},
 					messages: {
 						activity: {
@@ -129,6 +201,13 @@
 						},
 						activity_detail: {
 							required: "Kegiatanmu wajib diisi",
+						},
+						income: {
+							required: "Pemasukan wajib diisi",
+							digits: "Hanya boleh angka",
+						},
+						outcome: {
+							digits: "Hanya boleh angka",
 						},
 					},
 					submitHandler: function(form) {
@@ -167,7 +246,6 @@
 				var id = $(this).data('id');
 				var name = $(this).data('name');
 				$.get("{{ route('todos.index') }}" +'/' + id +'/edit', function (data) {
-					$('#modal-title').html('Edit Pegawai');
 					$('#btn_store').val("update-todo");
 					$('#todo__modal').modal('show');
 					$('#id').val(data.id);

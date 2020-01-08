@@ -119,7 +119,6 @@
 			var id = $(this).data('id');
 			var name = $(this).data('name');
 			$.get("{{ route('users.index') }}" +'/' + id +'/edit', function (data) {
-				$('#modal-title').html('Edit Pegawai');
 				$('#btn_store').val("update-user");
 				$('#user__modal').modal('show');
 				$('#id').val(data.id);
